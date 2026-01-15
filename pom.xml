@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>vinayath-tech</groupId>
+    <artifactId>pact-contract-testing-java</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0</version>
+    <description>Project containing all the Java code and material used in my 'Practical contract testing with Pact' course</description>
+    <modules>
+        <module>petstore-consumer</module>
+        <module>order-provider</module>
+    </modules>
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.42</version> <!-- Use the latest version -->
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+</project>
