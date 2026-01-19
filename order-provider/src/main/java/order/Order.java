@@ -1,4 +1,4 @@
-package petstore;
+package order;
 
 import lombok.Data;
 import lombok.Getter;
@@ -16,12 +16,4 @@ public class Order {
     private String petName;
     private String status;
     private boolean complete;
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
-    }
 }

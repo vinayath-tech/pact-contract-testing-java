@@ -86,6 +86,10 @@
                 <artifactId>maven</artifactId>
                 <version>${pact.version}</version>
                 <configuration>
+                    <pactBrokerUrl>http://localhost:8000</pactBrokerUrl>
+                    <pactDirectory>${project.build.directory}/pacts</pactDirectory>
+                    <pactBrokerUsername>pact</pactBrokerUsername>
+                    <pactBrokerPassword>pact</pactBrokerPassword>
 <!--                    <pactBrokerUrl>${env.PACT_BROKER_BASE_URL}</pactBrokerUrl>-->
 <!--                    <pactBrokerToken>${env.PACT_BROKER_TOKEN}</pactBrokerToken>-->
 <!--                    <pactBrokerAuthenticationScheme>Bearer</pactBrokerAuthenticationScheme>-->

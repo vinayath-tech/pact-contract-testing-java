@@ -1,0 +1,54 @@
+import au.com.dius.pact.consumer.MockServer;
+import au.com.dius.pact.consumer.dsl.*;
+import au.com.dius.pact.consumer.junit5.PactConsumerTestExt;
+import au.com.dius.pact.consumer.junit5.PactTestFor;
+import au.com.dius.pact.core.model.PactSpecVersion;
+import au.com.dius.pact.core.model.RequestResponsePact;
+import au.com.dius.pact.core.model.annotations.Pact;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import petstore.Order;
+import petstore.OrderServiceClient;
+
+import java.util.Map;
+
+
+@ExtendWith(PactConsumerTestExt.class)
+@PactTestFor(providerName = "order_provider", pactVersion = PactSpecVersion.V3)
+public class GetOrderTest {
+
+    @Pact(consumer = "petstore_consumer", provider = "order_provider")
+    public RequestResponsePact pactToGetExistingOrderId(PactDslWithProvider builder) {
+
+        DslPart body = LambdaDsl.newJsonBody((o) -> o
+                .integerType("id", Integer.parseInt(OrderId.EXISTING_ORDER_ID))
+                .integerType("petId", 789)
+                .stringType("petName", "Dog")
+                .stringType("status", "delivered")
+                .booleanType("complete", true)
+        ).build();
+
+        Map<String, Object> providerStateParams = Map.of("orderId", OrderId.EXISTING_ORDER_ID);
+
+        return builder
+                .given("Oder exists", providerStateParams)
+                .uponReceiving("Retrieving an existing order ID")
+                .path(String.format("/order/%s", OrderId.EXISTING_ORDER_ID))
+                .method("GET")
+                .willRespondWith()
+                .status(200)
+                .body(body)
+                .toPact();
+    }
+
+    @Test
+    @PactTestFor(pactMethod = "pactToGetExistingOrderId")
+    public void testFor_GET_existingOrderId_shouldYieldHTTP200(MockServer mockServer) {
+
+        OrderServiceClient client = new OrderServiceClient(mockServer.getUrl());
+        Order order = client.getOrder(OrderId.EXISTING_ORDER_ID);
+
+        Assertions.assertEquals(Integer.parseInt(OrderId.EXISTING_ORDER_ID), order.getId());
+    }
+}
