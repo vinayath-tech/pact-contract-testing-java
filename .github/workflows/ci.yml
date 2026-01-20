@@ -24,6 +24,7 @@ jobs:
         run: docker compose up -d --wait --wait-timeout 150
 
       - name: Run Consumer contract tests
+        working-directory: ./petstore-consumer
         run: mvn clean test
 
       - name: Publish Pact verification results
