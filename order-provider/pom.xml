@@ -26,6 +26,30 @@
         <lombok.version>1.18.34</lombok.version>
     </properties>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <pactBroker.url>http://localhost:8000</pactBroker.url>
+                        <pactbroker.auth.username>pact</pactbroker.auth.username>
+                        <pactbroker.auth.password>pact</pactbroker.auth.password>
+
+                        <!-- Publish verification results -->
+                        <pact.verifier.publishResults>true</pact.verifier.publishResults>
+
+                        <!-- Provider version -->
+                        <pact.provider.version>1.0.0</pact.provider.version>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+        </plugins>
+
+    </build>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -72,17 +96,6 @@
             <version>1.18.3</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>vinayath-tech</groupId>
-            <artifactId>petstore-consumer</artifactId>
-            <version>1.0.0</version>
-            <scope>compile</scope>
-        </dependency>
-
     </dependencies>
 
 </project>

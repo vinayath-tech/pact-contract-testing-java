@@ -1,0 +1,8 @@
+order\GlobalControllerExceptionHandler.class
+order\OrderRepository.class
+order\OrderController.class
+order\BadRequestException.class
+order\NotFoundException.class
+order\OrderServiceApplication.class
+order\Order.class
+order\OrderService.class

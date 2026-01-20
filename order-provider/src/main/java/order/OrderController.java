@@ -16,9 +16,9 @@ public class OrderController {
     }
 
     @GetMapping(value = "/order/{orderId}", produces = "application/json")
-    public Order getOrder(@PathVariable UUID addressId) {
+    public Order getOrder(@PathVariable Integer orderId) {
 
-        Order order = orderService.getOrder(addressId);
+        Order order = orderService.getOrder(orderId);
 
         if (order == null) {
             throw new NotFoundException();
@@ -27,9 +27,9 @@ public class OrderController {
         return order;
     }
 
-    @DeleteMapping("/address/{orderId}")
+    @DeleteMapping("/order/{orderId}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void deleteOrder(@PathVariable UUID orderId) {
+    public void deleteOrder(@PathVariable Integer orderId) {
 
         orderService.deleteOrder(orderId);
     }
