@@ -21,7 +21,7 @@ jobs:
           java-version: '21'
 
       - name: Start pact broker
-        run: docker compose up -d --wait --wait-timeout 30
+        run: docker compose up -d --wait --wait-timeout 150
 
       - name: Run Consumer contract tests
         run: mvn clean test
