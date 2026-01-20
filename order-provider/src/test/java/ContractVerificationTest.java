@@ -67,4 +67,11 @@ public class ContractVerificationTest {
         // This could involve inserting a record into a test database or configuring a mock service.
     }
 
+    @State("Order not exists")
+    public void orderWithIdNotExists(Map<String, Object> params) {
+        String orderId = params.get("orderId").toString();
+        System.out.println("Pact state params: " + params);
+
+        when(orderRepository.getById(Integer.parseInt(orderId))).thenReturn(null);
+    }
 }
