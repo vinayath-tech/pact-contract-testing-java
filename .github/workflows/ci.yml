@@ -34,5 +34,6 @@ jobs:
           PACT_BROKER_USERNAME: ${{ secrets.PACT_BROKER_USERNAME }}
           PACT_BROKER_PASSWORD: ${{ secrets.PACT_BROKER_PASSWORD }}
           PACT_CONSUMER_VERSION: ${{ github.sha }}
-          PACT_DIRECTORY: petstore-consumer/target/pacts
+          PACT_DIRECTORY: target/pacts
+        working-directory: ./petstore-consumer
         run: mvn pact:publish
