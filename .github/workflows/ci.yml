@@ -6,6 +6,11 @@ on:
       - master
     pull_request:
 
+env:
+  PACT_BROKER_URL: ${{ secrets.PACT_BROKER_URL }}
+  PACT_BROKER_USERNAME: ${{ secrets.PACT_BROKER_USERNAME }}
+  PACT_BROKER_PASSWORD: ${{ secrets.PACT_BROKER_PASSWORD }}
+
 jobs:
   contract-tests:
     runs-on: ubuntu-latest
@@ -30,10 +35,14 @@ jobs:
       - name: Publish Pact verification results
         if: success()
         env:
-          PACT_BROKER_URL: ${{ secrets.PACT_BROKER_URL }}
-          PACT_BROKER_USERNAME: ${{ secrets.PACT_BROKER_USERNAME }}
-          PACT_BROKER_PASSWORD: ${{ secrets.PACT_BROKER_PASSWORD }}
+#          PACT_BROKER_URL: ${{ secrets.PACT_BROKER_URL }}
+#          PACT_BROKER_USERNAME: ${{ secrets.PACT_BROKER_USERNAME }}
+#          PACT_BROKER_PASSWORD: ${{ secrets.PACT_BROKER_PASSWORD }}
           PACT_CONSUMER_VERSION: ${{ github.sha }}
           PACT_DIRECTORY: target/pacts
         working-directory: ./petstore-consumer
         run: mvn pact:publish
+
+      - name: Run verify pacts
+        working-directory: ./order-provider
+        run: mvn clean test -Dpact.verifier.publishResults=true -Dpact.provider.version=${{ github.sha }}
