@@ -85,6 +85,24 @@
         },
         "status": 200
       }
+    },
+    {
+      "description": "Retriving an Non existent oder ID",
+      "providerStates": [
+        {
+          "name": "Order not exists",
+          "params": {
+            "orderId": "00000"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "path": "/order/00000"
+      },
+      "response": {
+        "status": 404
+      }
     }
   ],
   "metadata": {

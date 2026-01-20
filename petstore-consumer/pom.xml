@@ -87,16 +87,13 @@
                 <version>${pact.version}</version>
                 <configuration>
                     <pactBrokerUrl>http://localhost:8000</pactBrokerUrl>
-                    <pactDirectory>${project.build.directory}/pacts</pactDirectory>
+                    <pactDirectory>target/pacts</pactDirectory>
                     <pactBrokerUsername>pact</pactBrokerUsername>
                     <pactBrokerPassword>pact</pactBrokerPassword>
-                    <skipPactPublish>false</skipPactPublish>
-<!--                    <pactBrokerUrl>${env.PACT_BROKER_BASE_URL}</pactBrokerUrl>-->
-<!--                    <pactBrokerToken>${env.PACT_BROKER_TOKEN}</pactBrokerToken>-->
-<!--                    <pactBrokerAuthenticationScheme>Bearer</pactBrokerAuthenticationScheme>-->
                 </configuration>
             </plugin>
         </plugins>
     </build>
+
 
 </project>
