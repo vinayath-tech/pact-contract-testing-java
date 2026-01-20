@@ -32,7 +32,7 @@ public class GetOrderTest {
         Map<String, Object> providerStateParams = Map.of("orderId", OrderId.EXISTING_ORDER_ID);
 
         return builder
-                .given("Oder exists", providerStateParams)
+                .given("Order exists", providerStateParams)
                 .uponReceiving("Retrieving an existing order ID")
                 .path(String.format("/order/%s", OrderId.EXISTING_ORDER_ID))
                 .method("GET")

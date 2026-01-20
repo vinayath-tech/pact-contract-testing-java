@@ -1,0 +1,101 @@
+{
+  "consumer": {
+    "name": "petstore_consumer"
+  },
+  "interactions": [
+    {
+      "description": "Retrieving an existing order ID",
+      "providerStates": [
+        {
+          "name": "Order exists",
+          "params": {
+            "orderId": "12345"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "path": "/order/12345"
+      },
+      "response": {
+        "body": {
+          "complete": true,
+          "id": 12345,
+          "petId": 789,
+          "petName": "Dog",
+          "status": "delivered"
+        },
+        "headers": {
+          "Content-Type": "application/json; charset=UTF-8"
+        },
+        "matchingRules": {
+          "body": {
+            "$.complete": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.id": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "integer"
+                }
+              ]
+            },
+            "$.petId": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "integer"
+                }
+              ]
+            },
+            "$.petName": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.status": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          },
+          "header": {
+            "Content-Type": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "regex",
+                  "regex": "application/json(;\\s?charset=[\\w\\-]+)?"
+                }
+              ]
+            }
+          }
+        },
+        "status": 200
+      }
+    }
+  ],
+  "metadata": {
+    "pact-jvm": {
+      "version": "4.6.14"
+    },
+    "pactSpecification": {
+      "version": "3.0.0"
+    }
+  },
+  "provider": {
+    "name": "order_provider"
+  }
+}

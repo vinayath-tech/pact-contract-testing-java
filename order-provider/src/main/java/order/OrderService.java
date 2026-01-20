@@ -13,12 +13,12 @@ public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
-    public Order getOrder(UUID orderId) {
+    public Order getOrder(Integer orderId) {
 
         return orderRepository.getById(orderId);
     }
 
-    public void deleteAddress(UUID orderId) {
+    public void deleteOrder(Integer orderId) {
 
         orderRepository.deleteById(orderId);
     }

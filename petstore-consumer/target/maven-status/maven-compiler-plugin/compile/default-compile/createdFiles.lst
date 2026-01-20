@@ -1,0 +1,5 @@
+petstore\Order.class
+petstore\OrderServiceClient.class
+petstore\NotFoundException.class
+petstore\OrderErrorHandler.class
+petstore\BadRequestException.class
