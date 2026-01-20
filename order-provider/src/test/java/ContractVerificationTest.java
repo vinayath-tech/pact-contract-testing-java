@@ -74,4 +74,10 @@ public class ContractVerificationTest {
 
         when(orderRepository.getById(Integer.parseInt(orderId))).thenReturn(null);
     }
+
+    @State("Order ID is invalid")
+    public void OrderIdIsInvalid() { }
+
+    @State("Delete order state")
+    public void OrderIdIsDeleted() { }
 }

@@ -8,6 +8,7 @@ import au.com.dius.pact.core.model.annotations.Pact;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import petstore.BadRequestException;
 import petstore.NotFoundException;
 import petstore.Order;
 import petstore.OrderServiceClient;
@@ -57,6 +58,19 @@ public class GetOrderTest {
                 .toPact();
     }
 
+    @Pact(consumer = "petstore_consumer", provider = "order_provider")
+    public RequestResponsePact pactToGetInvalidOrderId(PactDslWithProvider builder) {
+
+        return builder
+                .given("Order ID is invalid")
+                .uponReceiving("Retrieving an Invalid order ID")
+                .path(String.format("/order/%s", OrderId.INVALID_ORDER_ID))
+                .method("GET")
+                .willRespondWith()
+                .status(400)
+                .toPact();
+    }
+
     @Test
     @PactTestFor(pactMethod = "pactToGetExistingOrderId")
     public void testFor_GET_existingOrderId_shouldYieldHTTP200(MockServer mockServer) {
@@ -76,5 +90,13 @@ public class GetOrderTest {
         Assertions.assertThrows(NotFoundException.class, () -> {
             client.getOrder(OrderId.NON_EXISTING_ORDER_ID);
         });
+    }
+
+    @Test
+    @PactTestFor(pactMethod = "pactToGetInvalidOrderId")
+    public void testFor_GET_invalidOrderId_shouldYieldHTTP400(MockServer mockServer) {
+
+        OrderServiceClient client = new OrderServiceClient(mockServer.getUrl());
+        Assertions.assertThrows(BadRequestException.class, () -> client.getOrder(OrderId.INVALID_ORDER_ID));
     }
 }
