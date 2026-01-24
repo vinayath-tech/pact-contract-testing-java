@@ -71,6 +71,8 @@ Pact broker will be accessible at `http://localhost:8000` with default credentia
    ```bash
    mvn pact:publish
    ```
+<img width="1273" height="622" alt="Screenshot (61)" src="https://github.com/user-attachments/assets/04efcdb3-90da-4d5f-acd5-2c9c31096c34" />
+
    
 2.5. Create environment to perform deployment in Pact broker using:-
 ```bash
@@ -97,6 +99,8 @@ The Pact files will be published to the Pact Broker at `http://localhost:8000`.
    ```bash
    mvn test
    ```
+   
+<img width="1808" height="599" alt="Screenshot (62)" src="https://github.com/user-attachments/assets/5d6dc2d0-ec4a-4b01-8aab-05b1ba110428" />
 
 This will verify the `order-provider` service against the consumer contract published in the Pact Broker.
   
@@ -114,6 +118,8 @@ This will verify the `order-provider` service against the consumer contract publ
     cd ../petstore-consumer
     mvn verify
     ```
+    <img width="1720" height="850" alt="Screenshot (63)" src="https://github.com/user-attachments/assets/64ffce7d-3cd2-4fb2-a60f-f2f5dd3aad05" />
+
    
 This will ensure that both services are compatible in the production environment as defined in the Pact Broker.
 
