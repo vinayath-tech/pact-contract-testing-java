@@ -46,6 +46,78 @@
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>pact-can-i-deploy</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>pact-broker</executable>
+                            <arguments>
+                                <argument>can-i-deploy</argument>
+                                <argument>--broker-base-url</argument>
+                                <argument>http://localhost:8000</argument>
+
+                                <argument>--broker-username</argument>
+                                <argument>pact</argument>
+
+                                <argument>--broker-password</argument>
+                                <argument>pact</argument>
+
+                                <argument>--pacticipant</argument>
+                                <argument>order_provider</argument>
+
+                                <argument>--version</argument>
+                                <argument>${project.version}</argument>
+
+                                <argument>--to-environment</argument>
+                                <argument>prod</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>pact-record-deployment</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>pact-broker</executable>
+                            <arguments>
+                                <argument>record-deployment</argument>
+                                <argument>--broker-base-url</argument>
+                                <argument>http://localhost:8000</argument>
+
+                                <argument>--broker-username</argument>
+                                <argument>pact</argument>
+
+                                <argument>--broker-password</argument>
+                                <argument>pact</argument>
+
+                                <argument>--pacticipant</argument>
+                                <argument>order_provider</argument>
+
+                                <argument>--version</argument>
+                                <argument>${project.version}</argument>
+
+                                <argument>--environment</argument>
+                                <argument>prod</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+
+                </executions>
+            </plugin>
+
+
         </plugins>
 
     </build>
